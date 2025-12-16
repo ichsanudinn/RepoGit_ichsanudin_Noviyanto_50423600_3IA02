@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mahasiswa Planner</title>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-theme="light">
+
+  <header>
+    <div>
+      <h1>Mahasiswa Planner</h1>
+      <div class="sub">Buat & kelola tugas kampus — tugas, deadline, prioritas, catatan</div>
+    </div>
+    <div class="header-actions">
+      <button id="themeToggle" class="btn btn-ghost icon-btn" title="Ganti tema">
+        <i data-lucide="moon"></i>
+      </button>
+      <button id="seedBtn" class="btn btn-ghost" title="Isi contoh data">Isi Contoh</button>
+      <button id="exportBtn" class="btn btn-ghost" title="Export CSV">Export CSV</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card" aria-label="Input tugas">
+      <div class="card-header">
+        <div>
+          <strong class="card-title">Tambah Tugas Baru</strong>
+          <div class="muted">Form singkat — cocok untuk catatan cepat mahasiswa</div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="course">Mata Kuliah</label>
+        <input id="course" type="text" placeholder="Contoh: Algoritma & Pemrograman" />
+
+        <label for="title">Judul Tugas</label>
+        <input id="title" type="text" placeholder="Contoh: Laporan praktikum 3" />
+
+        <label for="due">Tanggal Deadline</label>
+        <input id="due" type="date" />
+
+        <label for="prio">Prioritas</label>
+        <select id="prio">
+          <option value="low">Low</option>
+          <option value="medium" selected>Medium</option>
+          <option value="high">High</option>
+        </select>
+
+        <label for="notes">Catatan</label>
+        <textarea id="notes" placeholder="Tambahkan catatan atau checklist singkat..."></textarea>
+
+        <div class="btn-group">
+          <button id="addBtn" class="btn btn-primary">+ Tambah Tugas</button>
+          <button id="clearBtn" class="btn btn-ghost">Reset</button>
+        </div>
+      </div>
+
+      <div class="stats" aria-hidden>
+        <div class="stat">
+          <h3 id="totalCount">0</h3>
+          <p>Semua tugas</p>
+        </div>
+        <div class="stat">
+          <h3 id="dueToday">0</h3>
+          <p>Deadline hari ini</p>
+        </div>
+        <div class="stat">
+          <h3 id="pendingCount">0</h3>
+          <p>Sisa/Belum selesai</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="card">
+        <div class="toolbar">
+          <div class="search">
+            <input id="searchInput" placeholder="Cari tugas atau mata kuliah..." />
+            <select id="sortSelect">
+              <option value="default">Urut: Terbaru</option>
+              <option value="dueAsc">Deadline ↑</option>
+              <option value="dueDesc">Deadline ↓</option>
+              <option value="prio">Prioritas</option>
+              <option value="course">Mata Kuliah</option>
+            </select>
+          </div>
+          <div class="filters">
+            <select id="filterStatus">
+              <option value="all">Semua</option>
+              <option value="pending">Belum selesai</option>
+              <option value="done">Selesai</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="cardList" class="list" aria-live="polite">
+          </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal">
+      <h3>Edit Tugas</h3>
+      <div class="input-group">
+        <label>Mata Kuliah</label>
+        <input id="m_course" type="text" />
+        <label>Judul</label>
+        <input id="m_title" type="text" />
+        <label>Deadline</label>
+        <input id="m_due" type="date" />
+        <label>Prioritas</label>
+        <select id="m_prio">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+        <label>Catatan</label>
+        <textarea id="m_notes"></textarea>
+
+        <div class="btn-group">
+          <button id="saveEdit" class="btn btn-primary">Simpan Perubahan</button>
+          <button id="cancelEdit" class="btn btn-ghost">Batal</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
